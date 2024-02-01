@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>postcard css docs</title>
+    <link rel="stylesheet" href="main.css">
+
+    <link rel="stylesheet" href="prism.css">
+
+    <script src="feather.min.js"></script>
+    <style>
+        :root {
+            --accent: #7d82ac;
+        }
+
+        p {
+            letter-spacing: -0.01ch;
+        }
+
+
+        .container {
+            /* width: 100%;
+            height: 100svh; */
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            grid-template-rows: 1fr;
+            grid-auto-columns: 1fr;
+            grid-auto-rows: 1fr;
+            gap: 1rem 1rem;
+            grid-auto-flow: row;
+            grid-template-areas:
+                "side page";
+
+        }
+
+        .side {
+            grid-area: side;
+            display: inline-flex;
+            flex-flow: column;
+            justify-content: start;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .side>.btn {
+            border-color: transparent !important;
+            /* outline: none !important; */
+            box-shadow: none !important;
+            margin-top: 1rem;
+        }
+
+        .docs {
+            grid-area: page;
+        }
+
+        aside {
+            position: relative;
+            /* border: 2px solid var(--accent); */
+            border-left: 30px solid color-mix(in srgb, var(--accent), black 49%);
+            padding: 1rem;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: small;
+            display: inline-block;
+        }
+
+        aside h4 {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-align: center !important;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            margin-left: -30px;
+            -webkit-transform: rotate(270deg);
+            -moz-transform: rotate(270deg);
+            -ms-transform: rotate(270deg);
+            -o-transform: rotate(270deg);
+            transform: rotate(270deg);
+            -webkit-transform-origin: 0 0;
+            -moz-transform-origin: 0 0;
+            -ms-transform-origin: 0 0;
+            -o-transform-origin: 0 0;
+            transform-origin: 0 0;
+
+        }
+
+        .sepia {
+            filter: sepia(1);
+        }
+
+        .colors {
+            color: initial !important;
+        }
+    </style>
+
+</head>
+
+<body colorscheme="dark">
+
+
+    <div class="container grid" style="margin-top: 1rem;">
+        <div class="side">
+            <button class="btn icon round" onclick="setSection('home')" title="home">
+                <i data-feather="home"></i>
+            </button>
+            <button class="btn icon" onclick="setSection('typo')" title="typography">
+                <i data-feather="type"></i>
+            </button>
+            <button class="btn icon round" onclick="setSection('grid')" title="grid">
+                <i data-feather="layout"></i>
+            </button>
+            <button class="btn icon" title="buttons" onclick="setSection('buttons')">
+                <i data-feather="divide-square"></i>
+            </button>
+            <button class="btn icon round" onclick="setSection('form')" title="form">
+                <i data-feather="credit-card"></i>
+            </button>
+
+        </div>
+        <div class="docs">
+            <section class="row gap-md">
+                <div>
+                    <section>
+                        <aside>
+                            <span style="margin-top: 1rem;color: var(--muted);margin-bottom: 8px;">
+                                <small>drop in CSS file</small>
+                                <small>for clean HTML and prototyping</small>
+                            </span>
+
+                            <img src="postcard.png" alt="postcard css" width="70%">
+
+                            <br>
+                            <h4>&nbsp;&nbsp; css &nbsp; postcard &nbsp;</h4>
+                        </aside>
+                        <br>
+                        <p class="muted" style="margin-top: 1rem;">You can customize some basic properties of the design
+                            with a few
+                            CSS variables.
+                        </p>
+                        <pre>
+                    <code class="language-css" style="max-width: 30ch;">
+    --bg: #f8f9fa;
+    --fg: #212529;
+    --accent: #7d82ac;
+                    </code>
+                </pre>
+                    </section>
+                    <div>
+                        <br>
+                        <label class="form-control" class="muted">
+                            <input type="checkbox" name="checkbox" id="theme" />
+                            theme dark/light
+                        </label>
+                    </div>
+                </div>
+                <!-- spacer -->
+                <div id="content"></div>
+
+            </section>
+
+        </div>
+    </div>
+
+    <footer class="hstack hcenter" style="width: 100%;color: var(--accent);">
+        <p>january 2024</p>
+    </footer>
+
+
+
+
+
+
+    <template id="typo">
+
+        <section style="margin-top: -2rem;">
+            <h3 class="muted bold">typography</h3>
+            <pre>
+                <code class="language-html" style="max-width: 30ch;">
+                Default text
+                <span class="muted">Muted text</span>
+                <a href="#">Hyperlinks</a>
+                <strong>Bold</strong>, <em>italics</em>, 
+                and
+                <del>strikethrough</del>
+                <mark>Highlighted text</mark>
+                </code>
+            </pre>
+
+
+            <section class="row gat-sm">
+                <section>
+                    Default text <br>
+                    <span class="muted">Muted text</span> <br>
+                    <a href="#">Hyperlinks</a> <br>
+                    <strong>Bold</strong>, <br> <em>italics</em>, and <br>
+                    <del>strikethrough</del> <br>
+                    <mark>Highlighted text</mark>
+
+                </section>
+                <section>
+                    <p>ul</p>
+                    <ul>
+                        <li>Down</li>
+                        <li>the</li>
+                        <li>rabbit</li>
+                        <li>hole</li>
+                    </ul>
+                    <p>ol</p>
+                    <ol>
+                        <li>Down</li>
+                        <li>the</li>
+                        <li>rabbit</li>
+                        <li>hole</li>
+                    </ol>
+                </section>
+            </section>
+            <section>
+                <h1>header h1</h1>
+                <h2>header h2</h2>
+                <h3>header h3</h3>
+                <h4>header h4</h4>
+            </section>
+            <script src="prism.js"></script>
+        </section>
+    </template>
+
+    <template id="home">
+        <section>
+            <p class="muted" style="line-height: 1.2;">
+                <small>
+                    <i>css is built almost entirely with AI assistant, few minor things reworked
+                        by me.This is first useable css code that work ok.
+                        Data for trainin LLM is from internet .But that is another story, and this is result ...
+                    </i>
+                </small>
+            </p>
+            <blockquote style="color: var(--accent);">
+                This is not an exhaustive CSS framework meant to handle all scenarios. It is a simple css
+                file you can use when you want something better than default browser styles.
+            </blockquote>
+            <h3 class="muted bold">sources</h3>
+            <article class="row gap-sm muted">
+                <section>
+                    <p>Cascading Style Sheets (CSS) is a style sheet language used for specifying the
+                        presentation and styling of a document written in a markup language such as HTML or XML
+                        (including XML dialects such as SVG, MathML or XHTML).</p>
+                </section>
+                <section>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank"
+                        rel="noopener noreferrer">developer.mozilla.org</a><br>
+                    <a href="https://www.csszengarden.com/" target="_blank"
+                        rel="noopener noreferrer">csszengarden</a><br>
+                    <a href="https://css-tricks.com/" target="_blank" rel="noopener noreferrer">css
+                        trics</a><br>
+                    <a href="https://moderncss.dev/topics/" target="_blank" rel="noopener noreferrer">modern.dev</a><br>
+                    <a href="https://web.dev/" target="_blank" rel="noopener noreferrer">web.dev</a><br>
+                    <a href="https://www.kevinpowell.co/" target="_blank" rel="noopener noreferrer">kewinpowell</a><br>
+                    <a href="https://una.im/" target="_blank" rel="noopener noreferrer">una</a><br>
+
+                </section>
+
+            </article>
+        </section>
+        <script src="prism.js"></script>
+    </template>
+
+    <template id="grid">
+        <section style="margin-top: 1rem;">
+            <h3 class="muted bold">grid</h3>
+            <pre>
+                <code class="language-html">
+                    <div class="row gap-md">
+                        <section class="dbg">
+                            <p>Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit.Fuga laboriosam
+                                similique saepe libero?</p>
+                        </section>
+                        <section >
+                            <p>Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit.Fuga laboriosam
+                                similique saepe libero?</p>
+                        </section>
+                        <section >
+                            <p>Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit.Fuga laboriosam
+                                similique saepe libero?</p>
+                        </section>
+                
+                    </div>
+                </code>
+            </pre>
+            <br>
+            <style>
+                .dbg {
+                    border: 1px solid gray
+                }
+            </style>
+
+            <div class="row gap-sm">
+                <section class="dbg">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Fuga laboriosam similique saepe libero?
+                        Quaerat facilis numquam expedita dolore
+                        ad odio nemo cumque laudantium ducimus sit,
+                        voluptatem dolorum tempora,
+                        incidunt quas.</p>
+                </section>
+                <section class="dbg">
+                    <p>Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit.Fuga laboriosam
+                        similique saepe libero?</p>
+                </section>
+                <section class="dbg">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Fuga laboriosam similique saepe libero?
+                        Quaerat facilis numquam expedita dolore
+                        ad odio nemo cumque laudantium ducimus sit,
+                        voluptatem dolorum tempora,
+                        incidunt quas.</p>
+                </section>
+            </div>
+
+
+        </section>
+        </section>
+        <script src="prism.js"></script>
+    </template>
+
+    <template id="form">
+        <section style="margin-top: -2rem;">
+            <h3 class="muted bold">form elements</h3>
+
+            <pre>
+                <code class="language-html">
+                    <form action="">
+                        <label class="form-control">
+                          <input type="radio" name="radio" />
+                          Radio
+                        </label>
+          
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" />
+                            Checkbox
+                        </label>
+                      </form>
+                </code>
+            </pre>
+            <br>
+            <div class="row gap-sm">
+                <div>
+                    <form action="">
+                        <label class="form-control">
+                            <input type="radio" name="radio" />
+                            Radio
+                        </label>
+
+                        <label class="form-control">
+                            <input type="radio" name="radio" checked />
+                            Radio - checked
+                        </label>
+                    </form>
+                </div>
+                <div>
+                    <form action="">
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox" />
+                            Checkbox
+                        </label>
+
+                        <label class="form-control">
+                            <input type="checkbox" name="checkbox-checked" checked />
+                            Checkbox - checked
+                        </label>
+
+                        <label class="form-control ">
+                            <input type="checkbox" name="checkbox-disabled" disabled />
+                            Checkbox Disabled
+                        </label>
+
+                        <label class="form-control ">
+                            <input type="checkbox" name="checkbox-disabled-checked" checked disabled />
+                            Checkbox Disabled - checked
+                        </label>
+                    </form>
+                </div>
+            </div>
+
+            <br>
+            <pre>
+                <code class="language-html">
+                    <label for="text-input">Text Input</label>
+                    <input class="input" id="text-input" type="text" />
+        
+                    <label for="date-input">Date Input</label>
+                    <input class="input" id="date-input" type="date" />
+                    
+                    <label for="textarea">Textarea</label>
+                    <textarea class="input" id="textarea"></textarea>
+
+                </code>
+            </pre>
+
+            <div>
+                <label for="text-input">Text Input</label>
+                <input class="input" id="text-input" type="text" />
+
+                <label for="date-input">Date Input</label>
+                <input class="input" id="date-input" type="date" />
+
+                <label for="textarea">Textarea</label>
+                <textarea class="input" id="textarea"></textarea>
+
+                <label for="readonly-input">Read-Only Input</label>
+                <input class="input" id="readonly-input" type="text" readonly value="This can only be copied" />
+
+                <label for="disabled-input">Disabled Input</label>
+                <input class="input" id="disabled-input" type="text" disabled />
+            </div>
+
+        </section>
+        <script src="prism.js"></script>
+    </template>
+
+    <template id="buttons">
+
+        <section style="margin-top: -2rem;">
+            <h3 class="muted bold">buttons</h3>
+            <pre>
+                <code class="language-html" style="max-width: 30ch;">
+                    
+                    <div class="vstack">
+                        <div>
+                            <button class="btn">button</button>
+
+                            <button class="btn icon">
+                                <i data-feather="info"></i>
+                            </button>
+
+                            <button class="btn icon round">
+                                <i data-feather="anchor"></i>
+                            </button>
+
+                            <button class="btn round">button</button>
+
+                            <button class="btn round">
+                                <i data-feather="anchor"></i>
+                                button
+                            </button>
+
+                            <input type="file" class="btn">
+                        </div>
+                    </div>
+
+                </code>
+            </pre>
+            <br>
+            <div class="vstack">
+                <div class="block">
+                    <button class="btn">button</button>
+                    <button class="btn icon"><i data-feather="info"></i></button>
+                    <button class="btn icon round"><i data-feather="anchor"></i></button>
+                    <button class="btn round">button</button>
+                    <button class="btn round"><i data-feather="edit"></i>button</button>
+                    <input type="file" class="btn">
+                </div>
+            </div>
+        </section>
+        <script src="prism.js"></script>
+    </template>
+
+    <script>
+
+        function toCode() {
+            const codes = document.querySelectorAll('.language-html');
+
+            console.log(codes)
+            codes.forEach(el => {
+                const elstr = el.innerHTML;
+                const str = escapeHTML(elstr);
+
+                el.innerHTML = str;
+
+            });
+        }
+
+        const escapeHTML = str =>
+            str.replace(
+                /[&<>'"]/g,
+                tag =>
+                ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+
+        function deleteChild() {
+            let e = document.querySelector("#content");
+
+            //e.firstElementChild can be used. 
+            let child = e.lastElementChild;
+            while (child) {
+                e.removeChild(child);
+                child = e.lastElementChild;
+            }
+        }
+
+        function setSection(id) {
+            deleteChild()
+            let el = document.querySelector('#content')
+            let template = document.querySelector(`#${id}`);
+
+            const clone = template.content.cloneNode(true);
+
+            el.appendChild(clone)
+            toCode()
+            feather.replace()
+        }
+    </script>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            feather.replace();
+            setSection('home');
+            console.log("DOM fully loaded and parsed");
+
+            const theme = document.querySelector("#theme")
+
+            theme.addEventListener("change", (e) => {
+                if (theme.checked) {
+                    document.body.setAttribute('colorscheme', 'light')
+                } else {
+                    document.body.setAttribute('colorscheme', 'dark')
+                }
+            });
+
+        });
+
+
+
+    </script>
+    <script src="prism.js" defer></script>
+</body>
+
+</html>

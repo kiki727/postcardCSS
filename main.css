@@ -1,0 +1,1057 @@
+/**
+ * Configs
+ */
+:root {
+  color-scheme: light;
+  /* Colors */
+  --bg: #fcfaf7;
+  --fg: #212529;
+  --muted: color-mix(in srgb, var(--fg), var(--bg) 30%);
+  --accent: wheat;
+  --dim: color-mix(in srgb, var(--fg) 30%, var(--bg) 50%);
+  --color-code: #dd1144;
+  --color-highlight: #fbf9c9;
+  --pancake-min: 40ch;
+  /* Fonts */
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  	Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-monospace: Menlo, Monaco, "Courier New", monospace;
+  --padding-sm: clamp(1rem, 3%, 1.5rem);
+  --padding-md: clamp(1.5rem, 6%, 3rem);
+  --padding-lg: clamp(3rem, 12%, 6rem);
+  --block-flow-sm: min(2rem, 4vh);
+  --block-flow-md: min(4rem, 8vh);
+  --block-flow-lg: min(8rem, 16vh);
+  --layout-gap-sm: clamp(1rem, 3vmax, 1.5rem);
+  --layout-gap-md: clamp(1.5rem, 6vmax, 3rem);
+  --layout-gap-lg: clamp(3rem, 8vmax, 4rem);
+  /* Sizes */
+  --spacing: 1.5625em;
+  --container-width: 88%;
+  --container-max-width: 80em;
+}
+
+[colorscheme=dark] {
+  color-scheme: dark;
+  /* Colors */
+  --fg: #f8f9fa;
+  --bg: #212529;
+}
+
+[color-scheme=light] {
+  color-scheme: light;
+  /* Colors */
+  --bg: #f8f9fa;
+  --fg: #212529;
+}
+
+/**
+ * @section CSS Reset
+ * Adapted from Andy Bell's modern CSS reset
+ * @link https://hankchizljaw.com/wrote/a-modern-css-reset/
+ */
+/**
+ * Remove the tap delay in webkit
+ * @link https://medium.com/@adactio/delay-a9df9edceef3#.7dmbl3xow
+ */
+a,
+button,
+input,
+select,
+textarea,
+label,
+summary {
+  touch-action: manipulation;
+}
+
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/**
+ * 1. Force scrollbar display to prevent jumping on pages.
+ * 2. Prevent iOS text size adjust after orientation change, without disabling
+ *    user zoom.
+ */
+html {
+  overflow-y: scroll;
+  /* 1 */
+  text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * 1. Remove the margin in all browsers (opinionated).
+ * 2. For the body to fill the viewport
+ */
+body {
+  margin: 0;
+  /* 1 */
+  min-height: 100svh;
+  /* 2 */
+}
+
+/**
+ * Prevent iframe, object, and embed elements from spilling outside of the page on smaller screens.
+ * height: auto causes iframes to smush, so it's omitted here.
+ */
+iframe,
+object,
+embed {
+  max-width: 100%;
+}
+
+/**
+ * @workaround Remove focus from tabindex="-1" elements which are only script focusable
+ * @link https://code.google.com/p/chromium/issues/detail?id=37721
+ */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+html {
+  --brand: var(--accent);
+  scrollbar-color: var(--accent) Canvas;
+}
+
+:root {
+  accent-color: var(--accent);
+}
+
+:focus-visible {
+  outline-color: var(--brand);
+}
+
+::selection {
+  background-color: var(--brand);
+}
+
+::marker {
+  color: var(--brand);
+}
+
+:is(::-webkit-calendar-picker-indicator,
+::-webkit-clear-button,
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button) {
+  color: var(--brand);
+}
+
+/**
+ * @section Grid
+ * Structure and layout
+ */
+/**
+ * Base wrapper class
+ */
+.grid {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--container-max-width);
+  width: var(--container-width);
+}
+
+/**
+ * Grids
+ */
+@media (min-width: 40em) {
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(3rem, 1fr));
+  }
+  .row.gap-sm {
+    gap: var(--padding-sm) var(--padding-sm);
+  }
+  .row.gap-md {
+    gap: var(--padding-md) var(--padding-md);
+  }
+  .row.gap-lg {
+    gap: var(--padding-lg) var(--padding-lg);
+  }
+}
+.vstack {
+  display: inline-flex;
+  gap: var(--padding-sm) var(--padding-sm);
+}
+
+.hstack {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-self: stretch;
+  flex: 1 1 auto;
+}
+
+.hleft {
+  align-items: flex-start;
+}
+
+.hright {
+  align-items: flex-end;
+}
+
+.hcenter {
+  align-items: center;
+}
+
+/**
+ * @section Typography
+ * Sets font styles for entire site
+ */
+html {
+  hanging-punctuation: first last;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 3rem 0 1.38rem;
+  line-height: 1.3;
+}
+
+:root {
+  /* Perfect Fourth */
+  --type-ratio: 1.414;
+  /*  Body font size  */
+  --body-font-size: 1rem;
+  /* Compounded headlines sizes */
+  --font-size-4: calc(var(--body-font-size) * var(--type-ratio));
+  --font-size-3: calc(var(--font-size-4) * var(--type-ratio));
+  --font-size-2: calc(var(--font-size-3) * var(--type-ratio));
+  --font-size-1: calc(var(--font-size-2) * var(--type-ratio));
+  --font-size-0: calc(0.875rem * var(--type-ratio));
+}
+
+h1,
+.h1 {
+  --font-size: var(--font-size-1);
+  font-size: var(--font-size);
+  font-weight: 800;
+}
+
+h2,
+.h2 {
+  --font-size: var(--font-size-2);
+  font-size: var(--font-size);
+  font-weight: 400;
+}
+
+h3,
+.h3 {
+  --font-size: var(--font-size-3);
+  font-size: var(--font-size);
+  font-weight: 300;
+}
+
+h4,
+.h4 {
+  --font-size: var(--font-size-4);
+  font-size: var(--font-size);
+  font-weight: 400;
+}
+
+@supports (font-size: 1cqi) {
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, .fluid-type) {
+    --_font-min: var(--font-size) - var(--font-size) * var(--font-size-diff, 0.3);
+    font-size: clamp(max(var(--body-font-size), var(--_font-min)), var(--_font-min) + 1cqi, var(--font-size));
+  }
+}
+/*
+* rest
+*/
+html {
+  min-block-size: 100%;
+}
+
+body {
+  min-block-size: 100%;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+  color: var(--fg);
+  background-color: var(--bg);
+  line-height: 1.75;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+h4 {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/*
+* new
+*/
+p {
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
+
+small {
+  font-size: 0.8rem;
+}
+
+a:not(.btn) {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+a:not(.btn):hover {
+  opacity: 0.6;
+}
+
+main {
+  padding: 0 1rem;
+  margin: 0 auto;
+}
+
+header {
+  margin-top: 8rem;
+  margin-bottom: 6rem;
+}
+
+hr {
+  margin: 4rem 0;
+  border: 0;
+  border-top: 1px solid var(--dim);
+}
+
+pre {
+  background-color: #f4f4f4;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+em {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+ul,
+ol {
+  margin-bottom: 1rem;
+}
+
+blockquote {
+  border-left: solid 4px var(--accent);
+  padding-left: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  padding-block: var(--padding-sm);
+  margin-block: var(--padding-md);
+}
+
+footer {
+  margin: 4rem 0;
+}
+
+/**
+ * @section Code
+ * Styling for code and preformatted text.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--accent);
+  font-size: 0.875em;
+}
+
+code {
+  color: red;
+  word-wrap: break-word;
+}
+
+pre {
+  background-color: var(--dim);
+  line-height: 1.5;
+  margin-bottom: var(--padding-md);
+  overflow: auto;
+  padding: 0.8125em;
+  tab-size: 4;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: var(--fg);
+}
+pre code {
+  color: inherit;
+  font-size: 1em;
+}
+
+/**
+ * @section Buttons
+ * Styling for CSS buttons.
+ */
+a.btn {
+  text-decoration: none;
+}
+
+.btn:is(button, input[type=submit], input[type=reset], input[type=button]),
+button,
+input[type=submit],
+input[type=reset],
+input[type=button],
+a.btn {
+  border: 1px solid transparent;
+  background-color: var(--bg);
+  outline-style: solid;
+  outline-color: transparent;
+}
+@media screen and (-ms-high-contrast: active) {
+  .btn:is(button, input[type=submit], input[type=reset], input[type=button]),
+  button,
+  input[type=submit],
+  input[type=reset],
+  input[type=button],
+  a.btn {
+    border: 2px solid currentcolor;
+  }
+}
+
+a.btn,
+button.btn,
+.btn,
+input[type=submit].btn,
+input[type=reset].btn,
+input[type=button].btn {
+  display: inline-flex;
+  gap: 1ch 1ch;
+  margin-inline: 1ch;
+  margin: 0.5ch;
+  background-color: var(--bg);
+  color: var(--fg);
+  border-radius: 8px;
+  box-shadow: 0 0 1px 1px color-mix(in srgb, var(--muted), white 3%);
+  min-height: 44px;
+  min-width: fit-content !important;
+  vertical-align: text-bottom;
+  line-height: 1.1;
+  transition: 220ms all ease-in-out;
+}
+a.btn:not(.icon),
+button.btn:not(.icon),
+.btn:not(.icon),
+input[type=submit].btn:not(.icon),
+input[type=reset].btn:not(.icon),
+input[type=button].btn:not(.icon) {
+  padding: 1ch 3ch;
+}
+a.btn:hover:not([disabled]), a.btn:active:not([disabled]),
+button.btn:hover:not([disabled]),
+button.btn:active:not([disabled]),
+.btn:hover:not([disabled]),
+.btn:active:not([disabled]),
+input[type=submit].btn:hover:not([disabled]),
+input[type=submit].btn:active:not([disabled]),
+input[type=reset].btn:hover:not([disabled]),
+input[type=reset].btn:active:not([disabled]),
+input[type=button].btn:hover:not([disabled]),
+input[type=button].btn:active:not([disabled]) {
+  background-color: color-mix(in srgb, var(--muted), var(--bg));
+  cursor: pointer;
+  color: var(--accent);
+}
+a.btn:focus:not([disabled]),
+button.btn:focus:not([disabled]),
+.btn:focus:not([disabled]),
+input[type=submit].btn:focus:not([disabled]),
+input[type=reset].btn:focus:not([disabled]),
+input[type=button].btn:focus:not([disabled]) {
+  outline-style: solid;
+  outline-color: var(--accent);
+  outline-width: 3px;
+  box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.18);
+  color: var(--accent);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn.icon {
+  padding: 1ch;
+}
+
+.btn > :where(.btn > svg, [data-icon]) {
+  display: inline-block !important;
+  width: max-content;
+  height: max-content;
+  flex-shrink: 0;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  padding: 0 !important;
+}
+
+.btn.round {
+  border-radius: 22px;
+}
+
+:where(button,
+input[type=button],
+input[type=submit],
+input[type=reset]),
+:where(input[type=file])::file-selector-button {
+  cursor: pointer;
+  touch-action: manipulation;
+  background-color: var(--bg);
+  color: var(--fg);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  box-shadow: 0 0 3px 3px color-mix(in srgb, --muted, white);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1ch;
+  font-weight: 700;
+  padding-block: 1ch;
+  padding-inline: 0.3rem;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+.form-control {
+  font-size: 1rem;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1.3em auto;
+  gap: 0.5em;
+  color: var(--fg);
+}
+
+input[type=radio] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: var(--bg);
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid var(--muted);
+  border-radius: 50%;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+.form-control + .form-control {
+  margin-top: 1em;
+}
+
+input[type=radio]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--accent);
+  background-color: CanvasText;
+}
+
+input[type=radio]:checked::before {
+  transform: scale(1);
+}
+
+input[type=radio]:focus,
+input[type=radio]:checked {
+  outline: max(2px, 0.15em) solid transparent;
+  outline-offset: max(2px, 0.15em);
+  border-color: var(--accent);
+}
+
+input[type=checkbox] {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  appearance: none;
+  /* For iOS < 15 to remove gradient background */
+  background-color: var(--bg);
+  /* Not removed via appearance */
+  margin: 0;
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid var(--muted);
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+
+input[type=checkbox]::before {
+  content: "";
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--accent);
+  background-color: CanvasText;
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type=checkbox]:checked::before {
+  transform: scale(1);
+}
+
+input[type=checkbox]:focus {
+  outline: max(2px, 0.15em) solid transparent;
+  outline-offset: max(2px, 0.15em);
+}
+
+input[type=checkbox]:checked {
+  border-color: var(--accent);
+}
+
+label:has(input:is([type=checkbox]:focus, [type=radio]:focus)) {
+  color: var(--accent);
+}
+
+.input {
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: var(--bg);
+  border: 2px solid var(--muted);
+  border-radius: 7px;
+  transition: 180ms box-shadow ease-in-out;
+  display: block;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  color: var(--fg);
+}
+
+.input:not(textarea, input[type=submit],
+input[type=reset],
+input[type=button]) {
+  line-height: 1;
+  height: 2.25rem;
+}
+
+input[type=file] {
+  font-size: 0.9em;
+  padding-top: 0.35rem;
+}
+
+.input[readonly] {
+  border-color: color-mix(in srgb, var(--muted), white 1%);
+  cursor: not-allowed;
+  color: var(--fg);
+  opacity: 0.7;
+}
+
+.input[disabled] {
+  border-color: color-mix(in srgb, var(--muted), white 1%);
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+textarea.input {
+  resize: vertical;
+}
+
+.input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent);
+  outline: 3px solid transparent;
+  color: var(--fg) !important;
+}
+
+label {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.1;
+  color: color-mix(in srgb, var(--muted), white);
+}
+
+input::placeholder,
+input::-webkit-input-placeholder,
+textarea::placeholder,
+textarea::-webkit-input-placeholder,
+select:invalid {
+  color: var(--fg);
+  opacity: 1;
+}
+
+label + .input {
+  margin-top: 0.3rem !important;
+}
+
+label:has(+ .input:focus) {
+  color: var(--accent) !important;
+}
+
+/* field legend */
+fieldset {
+  border: 4px solid var(--accent);
+  border-radius: 4px;
+  padding: 2rem 3rem 1rem;
+  border-radius: 15px;
+}
+
+legend {
+  color: var(--accent);
+  padding: 0 0.5rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+label + select,
+label:has(+ select) {
+  color: var(--fg);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+select {
+  color: var(--fg) !important;
+  outline: none !important;
+  line-height: 1;
+  padding: 3px 4px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  background-color: var(--bg);
+}
+
+select:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.18);
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: var(--spacing);
+  max-width: 100%;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: max(8px, 0.5em);
+}
+
+th {
+  border-bottom: 0.125em solid var(--fg);
+  font-weight: bold;
+  vertical-align: bottom;
+  font-weight: 800;
+  color: var(--fg);
+}
+
+thead th {
+  color: var(--fg);
+}
+
+td {
+  border-top: 1px solid var(--fg);
+  vertical-align: top;
+}
+
+/**
+ * Adds zebra striping
+ */
+.table-condensed th,
+.table-condensed td {
+  padding: max(4px, 0.25em);
+}
+
+/**
+ * Text sizes
+ */
+.sm {
+  font-size: 0.9375em;
+}
+
+.lg {
+  font-size: 1.1875em;
+  line-height: 1.4;
+}
+@media (min-width: 40em) {
+  .lg {
+    font-size: 1.3125em;
+  }
+}
+
+.bold {
+  font-weight: 800;
+}
+
+/**
+ * Text colors
+ */
+.muted {
+  color: var(--muted) !important;
+}
+
+.fg-fg {
+  color: var(--fg) !important;
+}
+
+.fg-bg {
+  color: var(--bg) !important;
+}
+
+/* 
+* new
+*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  max-width: 58ch;
+  text-wrap: pretty;
+}
+
+.block {
+  display: block !important;
+}
+
+.inline {
+  display: inline !important;
+}
+
+.inline-block {
+  display: inline-block !important;
+}
+
+/**
+ * Accessibility
+ */
+/*
+ * Hide only visually, but have it available for screen readers:
+ * @link https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  /* 1 */
+  width: 1px;
+}
+
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+/**
+ * Remove all animations and transitions for people that prefer not to see them
+ */
+@media (prefers-reduce-motion: reduce) {
+  :has(:target) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--padding-md);
+  }
+}
+/* Baseline for default links */
+a:not([class]) {
+  /* Relatively sized thickness and offset */
+  text-decoration-thickness: max(0.08em, 1px);
+  text-underline-offset: 0.15em;
+}
+
+:focus-visible {
+  --outline-size: max(2px, 0.15em);
+  outline: var(--outline-width, var(--outline-size)) var(--outline-style, solid) var(--outline-color, currentColor);
+  outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+/* Scroll padding allowance above anchor links */
+:target {
+  scroll-padding-block-start: 2rem;
+}
+
+/* Scroll padding allowance below focused elements 
+  to ensure they are clearly in view */
+:focus {
+  scroll-padding-block-end: 8vh;
+}
+
+/**
+ * Clear any floats
+ */
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/**
+ * @section Print
+ * Styling for printed content. Adapted from HTML5BP.
+ * @link http://html5boilerplate.com
+ */
+@media print {
+  /**
+   * Universal selector.
+   * Reset all content to transparent background, black color, and remove box and text shadows.
+   */
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  /**
+   * Specifies page margin
+   */
+  @page {
+    margin: 0.5cm;
+  }
+  /**
+   * Underline all links
+   */
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  /**
+   * Show URL after links
+   */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  /**
+   * Don't show URL for internal links
+   */
+  a[href^="#"]:after {
+    content: "";
+  }
+  /**
+   * Specifies the minimum number of lines to print at the top and bottom of a page.
+   */
+  p,
+  h1, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  /**
+   * Avoid inserting a page break after headers
+   */
+  h1, h2, h3 {
+    page-break-after: avoid;
+  }
+  /**
+   * Change border color on blockquotes and preformatted text.
+   * Avoid page breaks inside the content
+   */
+  pre,
+  blockquote {
+    border-color: #999;
+    page-break-inside: avoid;
+  }
+  /**
+   * Displayed as a table header row group
+   */
+  thead {
+    display: table-header-group;
+  }
+  /**
+   * Avoid inserting a page break inside table rows and images
+   */
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+}
+
+/*# sourceMappingURL=main.css.map */
